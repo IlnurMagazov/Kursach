@@ -76,9 +76,9 @@ function inform_Callback(hObject, eventdata, handles)
 % hObject    handle to inform (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global inform % объявляем глобально.         
-[nombre direc]=uigetfile('*.xlsx','inform'); % делаем путь с помощью функции uigetfile.
-inform=strcat(direc,nombre); % имя файла, который вызываем.
+global inform % Г®ГЎГєГїГўГ«ГїГҐГ¬ ГЈГ«Г®ГЎГ Г«ГјГ­Г®.         
+[nombre direc]=uigetfile('*.xlsx','inform'); % create the way by function uigetfile.
+inform=strcat(direc,nombre); % filename are called.
 
 
 % --- Executes on button press in pushbutton2.
@@ -87,65 +87,65 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global inform 
-M=xlsread(inform); % открываем экселевский файл с помощью xlsread.
+M=xlsread(inform); % open Excel-file by function xlsread.
 Signal=M(:,1);
-FftL=length(Signal);       % Количество линий Фурье спектра. Равно количеству отчетов сигнала
-%% Спектральное представление сигнала
-FftS=abs(fft(Signal,FftL));% Амплитуды преобразования Фурье сигнала
-FftS=2*FftS./FftL;% Нормировка спектра по амплитуде
-Fd=str2double(get(handles.edit2,'String')); %частота дискретизации которую я выдумал а может и не выдумал; %частота дискретизации которую я выдумал а может и не выдумал
-F=0:Fd/FftL:Fd/2-1/FftL;% Массив частот вычисляемого спектра Фурье
+FftL=length(Signal); % number of lines of the Foiriem spectrum
+%% The spectral representation of the signal
+FftS=abs(fft(Signal,FftL));% module of dpectrum lines
+FftS=2*FftS./FftL;% ГЌГ®Г°Г¬ГЁГ°Г®ГўГЄГ  Г±ГЇГҐГЄГІГ°Г  ГЇГ® Г Г¬ГЇГ«ГЁГІГіГ¤ГҐ
+Fd=str2double(get(handles.edit2,'String')); %Г·Г Г±ГІГ®ГІГ  Г¤ГЁГ±ГЄГ°ГҐГІГЁГ§Г Г¶ГЁГЁ ГЄГ®ГІГ®Г°ГіГѕ Гї ГўГ»Г¤ГіГ¬Г Г« Г  Г¬Г®Г¦ГҐГІ ГЁ Г­ГҐ ГўГ»Г¤ГіГ¬Г Г«; %Г·Г Г±ГІГ®ГІГ  Г¤ГЁГ±ГЄГ°ГҐГІГЁГ§Г Г¶ГЁГЁ ГЄГ®ГІГ®Г°ГіГѕ Гї ГўГ»Г¤ГіГ¬Г Г« Г  Г¬Г®Г¦ГҐГІ ГЁ Г­ГҐ ГўГ»Г¤ГіГ¬Г Г«
+F=0:Fd/FftL:Fd/2-1/FftL;% ГЊГ Г±Г±ГЁГў Г·Г Г±ГІГ®ГІ ГўГ»Г·ГЁГ±Г«ГїГҐГ¬Г®ГЈГ® Г±ГЇГҐГЄГІГ°Г  Г”ГіГ°ГјГҐ
 plot(handles.axes2,F,FftS(1:length(F)));
-ylabel('Амплитуда'); % подписываем ось Амплитуд.   
-xlabel('Частота');
+ylabel('ГЂГ¬ГЇГ«ГЁГІГіГ¤Г '); % ГЇГ®Г¤ГЇГЁГ±Г»ГўГ ГҐГ¬ Г®Г±Гј ГЂГ¬ГЇГ«ГЁГІГіГ¤.   
+xlabel('Г—Г Г±ГІГ®ГІГ ');
 % --- Executes on button press in pushbutton4.
 function pushbutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global inform 
-M=xlsread(inform); % открываем экселевский файл с помощью xlsread.
+M=xlsread(inform); % Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГЅГЄГ±ГҐГ«ГҐГўГ±ГЄГЁГ© ГґГ Г©Г« Г± ГЇГ®Г¬Г®Г№ГјГѕ xlsread.
 Signal=M(:,1);
-FftL=length(Signal);       % Количество линий Фурье спектра. Равно количеству отчетов сигнала
+FftL=length(Signal);       % ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г«ГЁГ­ГЁГ© Г”ГіГ°ГјГҐ Г±ГЇГҐГЄГІГ°Г . ГђГ ГўГ­Г® ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГі Г®ГІГ·ГҐГІГ®Гў Г±ГЁГЈГ­Г Г«Г 
 
-%% Спектральное представление сигнала
-FftS=fft(Signal,FftL);     % Получени спектра по ДПФ (или БПФ, по возможности)
-FftS=FftS.*conj(FftS)/FftL;% FftS - спектральная плотность мощности
+%% Г‘ГЇГҐГЄГІГ°Г Г«ГјГ­Г®ГҐ ГЇГ°ГҐГ¤Г±ГІГ ГўГ«ГҐГ­ГЁГҐ Г±ГЁГЈГ­Г Г«Г 
+FftS=fft(Signal,FftL);     % ГЏГ®Г«ГіГ·ГҐГ­ГЁ Г±ГЇГҐГЄГІГ°Г  ГЇГ® Г„ГЏГ” (ГЁГ«ГЁ ГЃГЏГ”, ГЇГ® ГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГЁ)
+FftS=FftS.*conj(FftS)/FftL;% FftS - Г±ГЇГҐГЄГІГ°Г Г«ГјГ­Г Гї ГЇГ«Г®ГІГ­Г®Г±ГІГј Г¬Г®Г№Г­Г®Г±ГІГЁ
 FftS=FftS(1:(FftL/2));
-%% Построение графиков сигнала и спектра
+%% ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ ГЈГ°Г ГґГЁГЄГ®Гў Г±ГЁГЈГ­Г Г«Г  ГЁ Г±ГЇГҐГЄГІГ°Г 
 plot(handles.axes1,Signal);    
-ylabel('Амплитуда'); % подписываем ось Амплитуд.   
-xlabel('Условное время');
+ylabel('ГЂГ¬ГЇГ«ГЁГІГіГ¤Г '); % ГЇГ®Г¤ГЇГЁГ±Г»ГўГ ГҐГ¬ Г®Г±Гј ГЂГ¬ГЇГ«ГЁГІГіГ¤.   
+xlabel('Г“Г±Г«Г®ГўГ­Г®ГҐ ГўГ°ГҐГ¬Гї');
 % --- Executes on button press in pushbutton7.
 function pushbutton7_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton7 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global inform 
-M=xlsread(inform); % открываем экселевский файл с помощью xlsread.
+M=xlsread(inform); % Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГЅГЄГ±ГҐГ«ГҐГўГ±ГЄГЁГ© ГґГ Г©Г« Г± ГЇГ®Г¬Г®Г№ГјГѕ xlsread.
 Signal=M(:,1);
-FftL=length(Signal); % Количество линий Фурье спектра. Равно количеству отчетов сигнала
+FftL=length(Signal); % ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г«ГЁГ­ГЁГ© Г”ГіГ°ГјГҐ Г±ГЇГҐГЄГІГ°Г . ГђГ ГўГ­Г® ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГі Г®ГІГ·ГҐГІГ®Гў Г±ГЁГЈГ­Г Г«Г 
 
-%% Спектральное представление сигнала
-FftS=fft(Signal,FftL);     % Получени спектра по ДПФ (или БПФ, по возможности)
-FftS=FftS.*conj(FftS)/FftL;% FftS - спектральная плотность мощности
-FftS=FftS(1:(FftL/2));     % Берем половину спектра
+%% Г‘ГЇГҐГЄГІГ°Г Г«ГјГ­Г®ГҐ ГЇГ°ГҐГ¤Г±ГІГ ГўГ«ГҐГ­ГЁГҐ Г±ГЁГЈГ­Г Г«Г 
+FftS=fft(Signal,FftL);     % ГЏГ®Г«ГіГ·ГҐГ­ГЁ Г±ГЇГҐГЄГІГ°Г  ГЇГ® Г„ГЏГ” (ГЁГ«ГЁ ГЃГЏГ”, ГЇГ® ГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГЁ)
+FftS=FftS.*conj(FftS)/FftL;% FftS - Г±ГЇГҐГЄГІГ°Г Г«ГјГ­Г Гї ГЇГ«Г®ГІГ­Г®Г±ГІГј Г¬Г®Г№Г­Г®Г±ГІГЁ
+FftS=FftS(1:(FftL/2));     % ГЃГҐГ°ГҐГ¬ ГЇГ®Г«Г®ГўГЁГ­Гі Г±ГЇГҐГЄГІГ°Г 
 
-%% Нормировка по масимальному значению
+%% ГЌГ®Г°Г¬ГЁГ°Г®ГўГЄГ  ГЇГ® Г¬Г Г±ГЁГ¬Г Г«ГјГ­Г®Г¬Гі Г§Г­Г Г·ГҐГ­ГЁГѕ
 FftS=FftS./max(FftS);    
-%% Построение графика сигнала и нормированного спектра
-Fd=str2double(get(handles.edit2,'String')); %частота дискретизации которую я выдумал а может и не выдумал
-F=0:Fd/FftL:Fd/2-1/FftL;% Массив частот вычисляемого спектра Фурье         
+%% ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ ГЈГ°Г ГґГЁГЄГ  Г±ГЁГЈГ­Г Г«Г  ГЁ Г­Г®Г°Г¬ГЁГ°Г®ГўГ Г­Г­Г®ГЈГ® Г±ГЇГҐГЄГІГ°Г 
+Fd=str2double(get(handles.edit2,'String')); %Г·Г Г±ГІГ®ГІГ  Г¤ГЁГ±ГЄГ°ГҐГІГЁГ§Г Г¶ГЁГЁ ГЄГ®ГІГ®Г°ГіГѕ Гї ГўГ»Г¤ГіГ¬Г Г« Г  Г¬Г®Г¦ГҐГІ ГЁ Г­ГҐ ГўГ»Г¤ГіГ¬Г Г«
+F=0:Fd/FftL:Fd/2-1/FftL;% ГЊГ Г±Г±ГЁГў Г·Г Г±ГІГ®ГІ ГўГ»Г·ГЁГ±Г«ГїГҐГ¬Г®ГЈГ® Г±ГЇГҐГЄГІГ°Г  Г”ГіГ°ГјГҐ         
 plot(handles.axes3,F,FftS(1:length(F)));    
-ylabel('Амплитуда'); % подписываем ось Амплитуд.   
-xlabel('Частота');
+ylabel('ГЂГ¬ГЇГ«ГЁГІГіГ¤Г '); % ГЇГ®Г¤ГЇГЁГ±Г»ГўГ ГҐГ¬ Г®Г±Гј ГЂГ¬ГЇГ«ГЁГІГіГ¤.   
+xlabel('Г—Г Г±ГІГ®ГІГ ');
 
 % --- Executes on button press in pushbutton8.
 function pushbutton8_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-cla (handles.axes1,'reset') % стираем нарисованные графики. 
+cla (handles.axes1,'reset') % Г±ГІГЁГ°Г ГҐГ¬ Г­Г Г°ГЁГ±Г®ГўГ Г­Г­Г»ГҐ ГЈГ°Г ГґГЁГЄГЁ. 
 cla (handles.axes2,'reset') 
 cla (handles.axes3,'reset')
 set(handles.edit2,'String',[])
@@ -183,22 +183,22 @@ function pushbutton9_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global inform 
-M=xlsread(inform); % открываем экселевский файл с помощью xlsread.
+M=xlsread(inform); % Г®ГІГЄГ°Г»ГўГ ГҐГ¬ ГЅГЄГ±ГҐГ«ГҐГўГ±ГЄГЁГ© ГґГ Г©Г« Г± ГЇГ®Г¬Г®Г№ГјГѕ xlsread.
 Signal=M(:,1);
-FftL=length(Signal);% Количество линий Фурье спектра. Равно количеству отчетов сигнала
+FftL=length(Signal);% ГЉГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г«ГЁГ­ГЁГ© Г”ГіГ°ГјГҐ Г±ГЇГҐГЄГІГ°Г . ГђГ ГўГ­Г® ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГі Г®ГІГ·ГҐГІГ®Гў Г±ГЁГЈГ­Г Г«Г 
 
-%% Спектральное представление сигнала
-FftS=fft(Signal,FftL);     % Получени спектра по ДПФ (или БПФ, по возможности)
-FftS=FftS.*conj(FftS)/FftL;% FftS - спектральная плотность мощности
-FftS=FftS(1:(FftL/2));     % Берем половину спектра
-Fd=str2double(get(handles.edit2,'String')); %частота дискретизации которую я выдумал а может и не выдумал; %частота дискретизации которую я выдумал а может и не выдумал
-F=0:Fd/FftL:Fd/2-Fd/FftL;    %Массив частот вычисляемого спектра Фурье
-%% Нормировка по масимальному значению
+%% Г‘ГЇГҐГЄГІГ°Г Г«ГјГ­Г®ГҐ ГЇГ°ГҐГ¤Г±ГІГ ГўГ«ГҐГ­ГЁГҐ Г±ГЁГЈГ­Г Г«Г 
+FftS=fft(Signal,FftL);     % ГЏГ®Г«ГіГ·ГҐГ­ГЁ Г±ГЇГҐГЄГІГ°Г  ГЇГ® Г„ГЏГ” (ГЁГ«ГЁ ГЃГЏГ”, ГЇГ® ГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГЁ)
+FftS=FftS.*conj(FftS)/FftL;% FftS - Г±ГЇГҐГЄГІГ°Г Г«ГјГ­Г Гї ГЇГ«Г®ГІГ­Г®Г±ГІГј Г¬Г®Г№Г­Г®Г±ГІГЁ
+FftS=FftS(1:(FftL/2));     % ГЃГҐГ°ГҐГ¬ ГЇГ®Г«Г®ГўГЁГ­Гі Г±ГЇГҐГЄГІГ°Г 
+Fd=str2double(get(handles.edit2,'String')); %Г·Г Г±ГІГ®ГІГ  Г¤ГЁГ±ГЄГ°ГҐГІГЁГ§Г Г¶ГЁГЁ ГЄГ®ГІГ®Г°ГіГѕ Гї ГўГ»Г¤ГіГ¬Г Г« Г  Г¬Г®Г¦ГҐГІ ГЁ Г­ГҐ ГўГ»Г¤ГіГ¬Г Г«; %Г·Г Г±ГІГ®ГІГ  Г¤ГЁГ±ГЄГ°ГҐГІГЁГ§Г Г¶ГЁГЁ ГЄГ®ГІГ®Г°ГіГѕ Гї ГўГ»Г¤ГіГ¬Г Г« Г  Г¬Г®Г¦ГҐГІ ГЁ Г­ГҐ ГўГ»Г¤ГіГ¬Г Г«
+F=0:Fd/FftL:Fd/2-Fd/FftL;    %ГЊГ Г±Г±ГЁГў Г·Г Г±ГІГ®ГІ ГўГ»Г·ГЁГ±Г«ГїГҐГ¬Г®ГЈГ® Г±ГЇГҐГЄГІГ°Г  Г”ГіГ°ГјГҐ
+%% ГЌГ®Г°Г¬ГЁГ°Г®ГўГЄГ  ГЇГ® Г¬Г Г±ГЁГ¬Г Г«ГјГ­Г®Г¬Гі Г§Г­Г Г·ГҐГ­ГЁГѕ
 FftS=FftS./max(FftS);   
-%% Определение несущих частот по спектру сигнала
-minpks=0.05;    %определяем минимальное значение пиков, ниже которых пиики не берем 
-distance=5;     %определяем минимальное расстояние между пиками
-[pks,locs] = findpeaks(FftS,'MINPEAKHEIGHT',minpks,'MINPEAKDISTANCE',distance);%выводит пики амплидуд синусодит и значения частот при которых они достигаются
-%pks - значение пика, locs - значение частоты
+%% ГЋГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐ Г­ГҐГ±ГіГ№ГЁГµ Г·Г Г±ГІГ®ГІ ГЇГ® Г±ГЇГҐГЄГІГ°Гі Г±ГЁГЈГ­Г Г«Г 
+minpks=0.05;    %Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г¬ГЁГ­ГЁГ¬Г Г«ГјГ­Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГЁГЄГ®Гў, Г­ГЁГ¦ГҐ ГЄГ®ГІГ®Г°Г»Гµ ГЇГЁГЁГЄГЁ Г­ГҐ ГЎГҐГ°ГҐГ¬ 
+distance=5;     %Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г¬ГЁГ­ГЁГ¬Г Г«ГјГ­Г®ГҐ Г°Г Г±Г±ГІГ®ГїГ­ГЁГҐ Г¬ГҐГ¦Г¤Гі ГЇГЁГЄГ Г¬ГЁ
+[pks,locs] = findpeaks(FftS,'MINPEAKHEIGHT',minpks,'MINPEAKDISTANCE',distance);%ГўГ»ГўГ®Г¤ГЁГІ ГЇГЁГЄГЁ Г Г¬ГЇГ«ГЁГ¤ГіГ¤ Г±ГЁГ­ГіГ±Г®Г¤ГЁГІ ГЁ Г§Г­Г Г·ГҐГ­ГЁГї Г·Г Г±ГІГ®ГІ ГЇГ°ГЁ ГЄГ®ГІГ®Г°Г»Гµ Г®Г­ГЁ Г¤Г®Г±ГІГЁГЈГ ГѕГІГ±Гї
+%pks - Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГЁГЄГ , locs - Г§Г­Г Г·ГҐГ­ГЁГҐ Г·Г Г±ГІГ®ГІГ»
 freequency=locs.*(Fd/FftL);
 set(handles.uitable1,'data',freequency);
